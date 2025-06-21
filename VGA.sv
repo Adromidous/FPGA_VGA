@@ -22,9 +22,9 @@
 
 module VGA(
     input clk,
-//    input [3:0] curr_r,
-//    input [3:0] curr_g,
-//    input [3:0] curr_b,
+    input [3:0] curr_r,
+    input [3:0] curr_g,
+    input [3:0] curr_b,
     input en_greyscale,
     output reg h_sync,
     output reg v_sync,
@@ -72,12 +72,9 @@ module VGA(
                 g_val <= grey_pixel;
                 b_val <= grey_pixel; 
             end else begin
-//                r_val <= curr_r;
-//                g_val <= curr_g;
-//                b_val <= curr_b;
-                  r_val <= 4'b0;
-                  g_val <= 4'b0;
-                  b_val <= 4'b0;
+                r_val <= curr_r;
+                g_val <= curr_g;
+                b_val <= curr_b;
             end
         end else begin
             r_val <= 4'b0;
@@ -87,7 +84,7 @@ module VGA(
         
     end
     
-    assign grey_pixel = 4'b1111;
+    assign grey_pixel = 0.3 * curr_r + 0.3 * curr_b + 0.3 * curr_b; //!! THIS WON'T WORK, NEED TO WORK AROUND DIVISION !!
     
     
     
